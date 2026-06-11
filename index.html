@@ -1,94 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Weather app</title>
 
-<head>
-    <title>Weather-app</title>
-</head>
+    <link rel="stylesheet" href="style.css" />
 
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
     <div class="container">
-        <div class="heading">
-            <div class="city">
-                Ludhiana
-            </div>
-        </div>
-        <div class="weather">
-            <img src="clear.png" alt="ERROR">
-            <div class="temp">
-                10c
-            </div>
-            <div class="condition">
-                Sunny
-            </div>
-            <div class="date">
-                today
-            </div>
-        </div>
-        <div class="details">
-            <div class="sun">
-                <div class="sunrise">
-                    <img src="" alt="">
-                    <div class="detail">
-                        <div class="text">
-                            Sunrise
-                        </div>
-                        <div class="time">
-                            time
-                        </div>
-                    </div>
-                </div>
-                <div class="sunset">
-                    <img src="" alt="">
-                    <div class="detail">
-                        <div class="text">
-                            Sunset
-                        </div>
-                        <div class="time">
-                            time
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="atmosphere">
-                <div class="pressure">
-                    <div class="detail">
-                        <div class="text">
-                            Pressure
-                        </div>
-                        <div class="value">
-                            1000
-                        </div>
-                    </div>
-                </div>
-                <div class="humidity">
-                    <div class="text">
-                        Humidity
-                    </div>
-                    <div class="value">
-                        94
-                    </div>
-                </div>
-            </div>
-            <div class="air">
-                <div class="speed">
-                    <div class="text">
-                        Speed
-                    </div>
-                    <div class="value">
-                        5
-                    </div>
-                </div>
-                <div class="degree">
-                    <div class="text">
-                        Degree
-                    </div>
-                    <div class="value">
-                        300
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
 
+      <div class="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <div class="input">
+          <input type="text" class="enter-city" />
+        </div>
+      </div>
+
+      <div class="heading">
+        <div class="city">Ludhiana</div>
+      </div>
+
+      <div class="weather">
+        <img src="images/clear.png" alt="Weather icon" />
+
+        <div class="temp">10°c</div>
+        <div class="condition">Clear</div>
+        <div class="date">today</div>
+      </div>
+
+      <div class="details">
+
+        <div class="sun">
+
+          <div class="sunrise">
+            <img
+              src="images/4431754.webp"
+              alt="Sunrise icon"
+            />
+
+            <div class="detail">
+              <div class="text">Sunrise</div>
+              <div class="time">time</div>
+            </div>
+          </div>
+
+          <div class="sunset">
+            <img
+              src="images/sunrise-3d-rendering-icon-illustration-png.webp"
+              alt="Sunset icon"
+            />
+
+            <div class="detail">
+              <div class="text">Sunset</div>
+              <div class="time">time</div>
+            </div>
+          </div>
+
+        </div>
+
+        <hr />
+
+        <div class="atmosphere">
+
+          <div class="pressure">
+            <div class="text">Pressure</div>
+            <div class="value">1000</div>
+          </div>
+
+          <div class="humidity">
+            <div class="text">Humidity</div>
+            <div class="value">94</div>
+          </div>
+
+        </div>
+
+        <hr />
+
+        <div class="air">
+
+          <div class="speed">
+            <div class="text">Speed</div>
+            <div class="value">5</div>
+          </div>
+
+          <div class="degree">
+            <div class="text">Degree</div>
+            <div class="value">300</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>

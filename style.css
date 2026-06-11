@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+}
+
+body {
+  background: rgb(53, 31, 53);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.container {
+  min-height: 35rem;
+  width: 22rem;
+  border-radius: 40px;
+  padding: 1rem;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.heading {
+  width: 100%;
+}
+
+.city {
+  font-size: 50px;
+}
+
+.weather {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.temp {
+  font-size: 50px;
+}
+
+.condition {
+  font-size: 20px;
+}
+
+.details {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sun,
+.atmosphere,
+.air {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.sunrise,
+.sunset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.sunrise img,
+.sunset img {
+  height: 30px;
+}
+
+hr {
+  width: 100%;
+}
