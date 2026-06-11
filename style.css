@@ -15,6 +15,13 @@ body {
   width: 100vw;
 }
 
+.heading {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+}
+
 .container {
   min-height: 35rem;
   width: 22rem;
@@ -22,49 +29,76 @@ body {
   padding: 1rem;
   color: white;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 1rem;
-}
-
-.heading {
-  width: 100%;
-}
-
-.city {
-  font-size: 50px;
-}
-
-.weather {
-  width: 100%;
 
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+
+  position: relative;
+
+  --after-display: none;
+
+  background: linear-gradient(
+    rgb(218, 168, 75),
+    rgb(77, 79, 192),
+    black
+  );
 }
 
-.temp {
+.container::after {
+  content: "";
+  height: 100%;
+  width: 100%;
+
+  background: rgba(0, 0, 0, 0.521);
+
+  position: absolute;
+
+  border-radius: 40px;
+
+  display: var(--after-display);
+
+  z-index: 10;
+}
+
+.container .heading .city {
+  font-size: 50px;
+  width: 100%;
+}
+
+.container .weather {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.container .weather .temp {
   font-size: 50px;
 }
 
-.condition {
+.container .weather .condition {
   font-size: 20px;
 }
 
-.details {
+.container .details {
   width: 100%;
+  font-size: 18px;
 
   display: flex;
   flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
   gap: 1rem;
 }
 
-.sun,
-.atmosphere,
-.air {
+.container .details .sun {
   width: 100%;
 
   display: flex;
@@ -72,19 +106,69 @@ body {
   justify-content: space-around;
 }
 
-.sunrise,
-.sunset {
+.container .details .sun .sunrise,
+.container .details .sun .sunset {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 }
 
-.sunrise img,
-.sunset img {
+.container .details .sun .sunrise img,
+.container .details .sun .sunset img {
   height: 30px;
+}
+
+.container .details .atmosphere,
+.container .details .air {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 hr {
   width: 100%;
+  border: 1px solid rgba(128, 128, 128, 0.568);
+}
+
+.container .search i {
+  position: absolute;
+
+  right: 10px;
+  top: 50px;
+
+  font-size: 30px;
+
+  padding: 1rem;
+
+  border: 1px solid white;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  z-index: 11;
+}
+
+input {
+  position: absolute;
+
+  top: 40%;
+  left: 10%;
+
+  width: 80%;
+
+  border-radius: 10px;
+
+  padding: 0.5rem;
+
+  border: none;
+  outline: none;
+
+  font-size: 18px;
+
+  display: none;
+
+  z-index: 11;
 }
