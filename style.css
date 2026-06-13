@@ -45,6 +45,13 @@ body {
     rgb(77, 79, 192),
     black
   );
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-4px);
 }
 
 .container::after {
@@ -77,12 +84,24 @@ body {
   width: 100%;
 }
 
+.container .weather img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
 .container .weather .temp {
   font-size: 50px;
+  font-weight: bold;
 }
 
 .container .weather .condition {
   font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.container .weather .date {
+  opacity: 0.8;
 }
 
 .container .details {
@@ -128,6 +147,10 @@ body {
   justify-content: space-around;
 }
 
+.value {
+  font-weight: 600;
+}
+
 hr {
   width: 100%;
   border: 1px solid rgba(128, 128, 128, 0.568);
@@ -149,6 +172,12 @@ hr {
   cursor: pointer;
 
   z-index: 11;
+
+  transition: 0.3s;
+}
+
+.container .search i:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 input {
@@ -171,4 +200,22 @@ input {
   display: none;
 
   z-index: 11;
+}
+
+input:focus {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 450px) {
+  .container {
+    width: 95%;
+  }
+
+  .city {
+    font-size: 40px !important;
+  }
+
+  .temp {
+    font-size: 40px !important;
+  }
 }
