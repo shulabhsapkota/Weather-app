@@ -1,12 +1,14 @@
 const search = document.querySelector("i");
-const input = document.querySelector("input");
+const input = document.querySelector(".enter-city");
 const dark = document.querySelector(".container");
-const image = document.querySelector(
-  ".container .weather img"
-);
+const image = document.querySelector(".weather img");
 
-input.placeholder =
-  "Enter city name...";
+const apiKey = "941adbdd90452fb11967c3b4f316b7af";
+
+const apiUrl =
+  "https://api.openweathermap.org/data/2.5/weather?q=";
+
+input.placeholder = "Enter city name...";
 
 search.addEventListener("click", (e) => {
   input.style.display = "block";
@@ -16,21 +18,42 @@ search.addEventListener("click", (e) => {
     "block"
   );
 
+  input.focus();
+
   e.stopPropagation();
 });
 
-window.addEventListener("click", () => {
-  input.style.display = "none";
+input.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
 
-  dark.style.setProperty(
-    "--after-display",
-    "none"
-  );
+window.addEventListener("click", (e) => {
+  if (
+    e.target !== input &&
+    e.target !== search
+  ) {
+    input.style.display = "none";
+
+    dark.style.setProperty(
+      "--after-display",
+      "none"
+    );
+  }
 });
 
 input.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
+
+    const city =
+      input.value.trim();
+
+    if (city === "") {
+      alert(
+        "Please enter a city name."
+      );
+      return;
+    }
 
     input.style.display = "none";
 
@@ -39,63 +62,59 @@ input.addEventListener("keydown", (event) => {
       "none"
     );
 
-    checkWeather(input.value);
+    checkWeather(city);
   }
 });
 
-input.addEventListener("focus", () => {
-  input.select();
-});
+function formatTime(
+  timestamp,
+  timezoneOffset
+) {
+  const date = new Date(
+    (timestamp + timezoneOffset) * 1000
+  );
 
-function formateTime(time) {
-  const currentTime =
-    new Date(time * 1000);
-
-  const hours =
-    currentTime.getHours();
-
-  const minute =
-    currentTime.getMinutes();
-
-  const ampm =
-    hours > 12 ? "PM" : "AM";
+  let hours =
+    date.getUTCHours();
 
   const minutes =
-    minute > 10
-      ? minute
-      : "0" + minute;
+    date
+      .getUTCMinutes()
+      .toString()
+      .padStart(2, "0");
+
+  const ampm =
+    hours >= 12 ? "PM" : "AM";
+
+  hours =
+    hours % 12 || 12;
 
   return `${hours}:${minutes} ${ampm}`;
 }
 
-let apiKey =
-  "6062d12abc846cba013eedb879596f84";
-
-let apiUrl =
-  "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
-
 async function checkWeather(city) {
   try {
-    let response =
+    const response =
       await fetch(
-        apiUrl +
-          city +
-          `&APPID=${apiKey}`
+        `${apiUrl}${encodeURIComponent(
+          city
+        )}&appid=${apiKey}&units=metric`
       );
 
-    if (!response.ok) {
-      alert(
-        "City not found!"
-      );
-      return;
-    }
-
-    let data =
+    const data =
       await response.json();
 
     console.log(data);
 
-    const date =
+    if (!response.ok) {
+      alert(
+        data.message ||
+          "City not found!"
+      );
+      return;
+    }
+
+    const today =
       new Date();
 
     const options = {
@@ -105,16 +124,13 @@ async function checkWeather(city) {
       day: "numeric",
     };
 
-    const formattedDate =
-      date.toLocaleDateString(
+    document.querySelector(
+      ".date"
+    ).innerHTML =
+      today.toLocaleDateString(
         "en-IN",
         options
       );
-
-    document.querySelector(
-      ".container .weather .date"
-    ).innerHTML =
-      formattedDate;
 
     document.querySelector(
       ".city"
@@ -122,91 +138,100 @@ async function checkWeather(city) {
       data.name;
 
     document.querySelector(
-      ".container .weather .temp"
+      ".temp"
     ).innerHTML =
-      data.main.temp + "°c";
+      Math.round(
+        data.main.temp
+      ) + "°C";
 
     document.querySelector(
-      ".container .weather .condition"
+      ".condition"
     ).innerHTML =
       data.weather[0].main;
 
     document.querySelector(
-      ".container .details .sun .sunrise .time"
+      ".sunrise .time"
     ).innerHTML =
-      formateTime(
-        data.sys.sunrise
+      formatTime(
+        data.sys.sunrise,
+        data.timezone
       );
 
     document.querySelector(
-      ".container .details .sun .sunset .time"
+      ".sunset .time"
     ).innerHTML =
-      formateTime(
-        data.sys.sunset
+      formatTime(
+        data.sys.sunset,
+        data.timezone
       );
 
     document.querySelector(
-      ".container .details .atmosphere .pressure .value"
+      ".pressure .value"
     ).innerHTML =
-      data.main.pressure;
+      data.main.pressure +
+      " hPa";
 
     document.querySelector(
-      ".container .details .atmosphere .humidity .value"
+      ".humidity .value"
     ).innerHTML =
-      data.main.humidity;
+      data.main.humidity +
+      "%";
 
     document.querySelector(
-      ".container .details .air .speed .value"
+      ".speed .value"
     ).innerHTML =
-      data.wind.speed;
+      data.wind.speed +
+      " m/s";
 
     document.querySelector(
-      ".container .details .air .degree .value"
+      ".degree .value"
     ).innerHTML =
-      data.wind.deg;
+      data.wind.deg +
+      "°";
 
-    if (
-      data.weather[0].main ===
-      "Haze"
-    ) {
-      image.src =
-        "clouds.png";
-    } else if (
-      data.weather[0].main ===
-      "Clear"
-    ) {
-      image.src =
-        "clear.png";
-    } else if (
-      data.weather[0].main ===
-      "Rain"
-    ) {
-      image.src =
-        "rain.png";
-    } else if (
-      data.weather[0].main ===
-      "Drizzle"
-    ) {
-      image.src =
-        "drizzle.png";
-    } else if (
-      data.weather[0].main ===
-      "Mist"
-    ) {
-      image.src =
-        "Mist.png";
-    } else {
-      image.src =
-        "clouds.png";
+    const weather =
+      data.weather[0].main;
+
+    switch (weather) {
+      case "Clear":
+        image.src =
+          "images/clear.png";
+        break;
+
+      case "Clouds":
+      case "Haze":
+        image.src =
+          "images/clouds.png";
+        break;
+
+      case "Rain":
+        image.src =
+          "images/rain.png";
+        break;
+
+      case "Drizzle":
+        image.src =
+          "images/drizzle.png";
+        break;
+
+      case "Mist":
+      case "Fog":
+        image.src =
+          "images/Mist.png";
+        break;
+
+      default:
+        image.src =
+          "images/clouds.png";
     }
 
     input.value = "";
   } catch (error) {
+    console.error(error);
+
     alert(
       "Network error. Please try again."
     );
-
-    console.error(error);
   }
 }
 
